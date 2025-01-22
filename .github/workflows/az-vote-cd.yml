@@ -12,7 +12,7 @@ jobs:
     environment: az-vote-app-dev
     steps:
     - name: Checkout
-      uses: actions/checkout@v2.3.4
+      uses: actions/checkout@v4.2.2
     - name: Azure Login
       uses: azure/login@v1
       with:
@@ -32,7 +32,7 @@ jobs:
       environment: az-vote-app-stage
       steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v4.2.2
         with:
           ref: ${{ github.event.client_payload.sha }}
       - name: Download Image Tags
