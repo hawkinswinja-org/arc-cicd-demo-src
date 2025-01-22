@@ -22,6 +22,8 @@ jobs:
       uses: Azure/login@v2.2.0
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Set SHORT_SHA environment variable
+      run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
     - name: Create Frontend Image Tags
       env:
         SOURCE_LOCATION: src/azure-vote-front 
@@ -29,10 +31,11 @@ jobs:
         IMAGE_NAME: azure-vote-front
         TASKNAME: FRONTEND_IMAGE
         AZ_ACR_NAME: ${{ secrets.AZ_ACR_NAME }}
-        
+        # IMAGE_TAG: $(git rev-parse --short HEAD)
       uses: Azure/cli@v2.1.0
       with:
         inlineScript:  |
+          echo "short sha is ${{ env.SHORT_SHA }}"
           chmod +x $GITHUB_WORKSPACE/utils/buildContainerTemplate.sh
           $GITHUB_WORKSPACE/utils/buildContainerTemplate.sh -f $SRC_FOLDER \
                                                            -g $GITHUB_WORKSPACE \
@@ -40,8 +43,8 @@ jobs:
                                                            -u $AZ_ACR_NAME \
                                                            -r $IMAGE_REPO_NAME/$IMAGE_NAME \
                                                            -t $TASKNAME \
-                                                           -d $DOCKER_FILE
-                                                           -m $(git rev-parse --short HEAD)
+                                                           -d $DOCKER_FILE \
+                                                           -m ${{ env.SHORT_SHA }}
     - name: Create Backend Image Tags
       env:
         SOURCE_LOCATION: src/azure-vote-back
