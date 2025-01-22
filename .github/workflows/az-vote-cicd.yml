@@ -28,7 +28,8 @@ jobs:
         DOCKER_FILE: Dockerfile
         IMAGE_NAME: azure-vote-front
         TASKNAME: FRONTEND_IMAGE
-        AZ_ACR_NAME: ${{ secrets.AZ_ACR_NAME }}   
+        AZ_ACR_NAME: ${{ secrets.AZ_ACR_NAME }}
+        
       uses: Azure/cli@v2.1.0
       with:
         inlineScript:  |
@@ -40,6 +41,7 @@ jobs:
                                                            -r $IMAGE_REPO_NAME/$IMAGE_NAME \
                                                            -t $TASKNAME \
                                                            -d $DOCKER_FILE
+                                                           -m $(git rev-parse --short HEAD)
     - name: Create Backend Image Tags
       env:
         SOURCE_LOCATION: src/azure-vote-back
