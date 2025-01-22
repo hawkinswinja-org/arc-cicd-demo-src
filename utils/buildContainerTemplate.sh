@@ -1,5 +1,5 @@
 #!/bin/bash
-while getopts "f:g:s:u:r:t:d:" option;
+while getopts "f:g:s:u:r:t:d:m:" option;
     do
     case "$option" in
         f ) SRC_FOLDER=${OPTARG};;
