@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SRC_FOLDER: azure-vote
-      IMAGE_REPO_NAME: azvote-gh      
+      IMAGE_REPO_NAME: azvote 
     steps:
     - name: Checkout
       uses: actions/checkout@v4.2.2
