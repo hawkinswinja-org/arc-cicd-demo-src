@@ -62,7 +62,6 @@ jobs:
       uses: Azure/cli@v2.1.0
       with:
         inlineScript:  |
-          TAG=$(git log -n 1 --format="%H" -- "$GITHUB_WORKSPACE/$SRC_FOLDER/$SOURCE_LOCATION")
           chmod +x $GITHUB_WORKSPACE/utils/buildContainerTemplate.sh
           $GITHUB_WORKSPACE/utils/buildContainerTemplate.sh -f $SRC_FOLDER \
                                                            -g $GITHUB_WORKSPACE \
