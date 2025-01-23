@@ -45,7 +45,7 @@ jobs:
                                                            -r $IMAGE_REPO_NAME/$IMAGE_NAME \
                                                            -t $TASKNAME \
                                                            -d $DOCKER_FILE \
-                                                           -m {{ env.FT }}
+                                                           -m ${{ env.FT }}
 
     - name: backend tag
       run: |
@@ -71,7 +71,7 @@ jobs:
                                                            -r $IMAGE_REPO_NAME/$IMAGE_NAME \
                                                            -t $TASKNAME \
                                                            -d $DOCKER_FILE \
-                                                           -m {{ env.FT }}
+                                                           -m ${{ env.FT }}
     - name: Upload Image Tags
       uses: actions/upload-artifact@v4.6.0
       with:
